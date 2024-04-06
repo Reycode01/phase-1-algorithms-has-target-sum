@@ -1,34 +1,39 @@
+/**
+ * Checks if any two numbers in the array add up to the target.
+ * @param {number[]} array - The array of numbers.
+ * @param {number} target - The target sum.
+ * @returns {boolean} - True if a pair is found, otherwise false.
+ */
 function hasTargetSum(array, target) {
-  // Write your algorithm here
+  array.sort((a, b) => a - b);
+  let left = 0,
+      right = array.length - 1;
+  while (left < right) {
+    const sum = array[left] + array[right];
+    if (sum === target) return true;
+    sum < target ? left++ : right--;
+  }
+  return false;
 }
 
 /* 
-  Write the Big O time complexity of your function here
+  Time complexity: O(n log n)
 */
 
 /* 
-  Add your pseudocode here
+  Steps:
+  1. Sort the array.
+  2. Move two pointers towards each other while checking the sum of the numbers they point to.
+  3. If the sum equals the target, return true.
+  4. If the sum is less than the target, move the left pointer to the right.
+  5. If the sum is greater than the target, move the right pointer to the left.
+  6. If no pair is found, return false.
 */
 
 /*
-  Add written explanation of your solution here
+  Explanation:
+  This function sorts the array and then uses a method called the "two-pointer technique" to efficiently search for a pair of numbers that add up to the target. 
 */
 
-// You can run `node index.js` to view these console logs
-if (require.main === module) {
-  // add your own custom tests in here
-  console.log("Expecting: true");
-  console.log("=>", hasTargetSum([3, 8, 12, 4, 11, 7], 10));
-
-  console.log("");
-
-  console.log("Expecting: true");
-  console.log("=>", hasTargetSum([22, 19, 4, 6, 30], 25));
-
-  console.log("");
-
-  console.log("Expecting: false");
-  console.log("=>", hasTargetSum([1, 2, 5], 4));
-}
-
 module.exports = hasTargetSum;
+
